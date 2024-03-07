@@ -3,12 +3,7 @@ import cv2
 import xml.dom.minidom as xmldom
 import os
 import numpy as np
-
-
-consumables = ["hem_o_lok", "clip", "clamp", "buffer_tube", "guide_needle", "suture_needle", "syringe", "specimen_bag",
-               "cotton_ball", "gauze", "line", "other_consumables"]
-instrument = ["grasping_forceps", "attractor", "needle_holder", "scissors", "ultrasonic_knife", "ultrasonic_clamp",
-              "stapler", "hook", "other_instrument"]
+from tqdm import tqdm
 
 # 创建保存结果的文件夹
 os.makedirs("result", exist_ok=True)
@@ -50,7 +45,7 @@ for label in labels:
 
 
 tracks = xml_file.getElementsByTagName('track')
-for track in tracks:
+for track in tqdm(tracks, desc="Processing", unit="track"):
     task_id = int(track.getAttribute('task_id'))
     task_num = id2num[task_id]
     video_name = num_to_vName[task_num]
@@ -62,7 +57,6 @@ for track in tracks:
     if len(polygon) > 0:
         frame_num = int(polygon[0].getAttribute('frame')) - id2frame[task_id]
         label = track.getAttribute('label')
-        print("正在处理task{}的第{}帧...".format(task_num, frame_num))
         img_path = "result/task{}_{}.png".format(task_num, frame_num)
         # 如果还没截取这个帧,就先截取这个帧
         if not os.path.exists(img_path):
@@ -82,4 +76,3 @@ for track in tracks:
         img = cv2.imread(img_path)
         img_poly = cv2.polylines(img, np.int32([pts]), isClosed=True, color=dic[label], thickness=2)
         cv2.imwrite(img_path, img_poly)
-

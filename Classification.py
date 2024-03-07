@@ -2,6 +2,7 @@ import cv2
 import xml.dom.minidom as xmldom
 import os
 import numpy as np
+from tqdm import tqdm
 
 
 consumables = ["hem_o_lok", "clip", "clamp", "buffer_tube", "guide_needle", "suture_needle", "syringe", "specimen_bag",
@@ -36,7 +37,7 @@ for task in tasks:
     num_to_vName[task_num] = task_source
 
 tracks = xml_file.getElementsByTagName('track')
-for track in tracks:
+for track in tqdm(tracks, desc="Processing", unit="track"):
     task_id = int(track.getAttribute('task_id'))
     task_num = id2num[task_id]
     video_name = num_to_vName[task_num]
@@ -48,7 +49,6 @@ for track in tracks:
     if len(polygon) > 0:
         label = track.getAttribute('label')
         frame_num = int(polygon[0].getAttribute('frame')) - id2frame[task_id]
-        print("正在处理task{}  label:{}  第{}帧".format(task_num, label, frame_num))
         img_path = "classification/{}/task{}_{}.png".format( label, task_num, frame_num)
         # 如果还没截取这个帧,就先截取这个帧
         if not os.path.exists("classification/{}".format(label)):
