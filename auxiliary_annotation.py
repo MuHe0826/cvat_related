@@ -17,6 +17,7 @@ def getFrames(num, path, xml_path):
     # 读取视频文件
     cap = cv2.VideoCapture(path)  # 视频的句柄
     frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))  # 视频总帧数
+
     # 随机生成需要截取的帧,这些帧需要没有被标记
     tree = ET.parse(xml_path)
     annotations = tree.getroot()
@@ -29,6 +30,7 @@ def getFrames(num, path, xml_path):
 
     for frame in frames:
         img_path = "{}/{}_0000.png".format(save_path, frame)
+
         print(img_path)
         # 如果还没截取这个帧,就先截取这个帧
         if not os.path.exists(img_path):
@@ -36,6 +38,7 @@ def getFrames(num, path, xml_path):
             ret, frame = cap.read()  # ret表示图像是否读取成功 frame为读到的图像文件
             if ret:
                 cv2.imwrite(img_path, frame)  # 将图像信息保存为指定格式的图像文件
+
 
 
 def draw_outline(source_images, source_labels, output_dir):
@@ -146,6 +149,7 @@ def process_annotation(xml_path, source_labels):
         file.writelines(lines)
 
 
+
 if __name__ == "__main__":
     # 任务编号与相应的视频路径
     num_to_vName = {
@@ -174,4 +178,5 @@ if __name__ == "__main__":
 
     # 3.根据生成的labels处理对应的xml文件
     process_annotation(xml_name, source_labels)
+
 

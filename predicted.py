@@ -74,6 +74,7 @@ if __name__ == "__main__":
     source_labels = "auxiliary/task4/label"
     output_dir = "predicted/res"
 
+
     # layer_overlay(source_images, source_labels, output_dir)
     draw_outline(source_images, source_labels, output_dir)
 

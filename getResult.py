@@ -48,6 +48,7 @@ for label in labels:
     b = int(label_color[5:7], 16)
     dic[label_name] = (b, g, r) # cv2.polylines()函数输入的颜色是（B,G,R）格式
 
+
 tracks = xml_file.getElementsByTagName('track')
 for track in tracks:
     task_id = int(track.getAttribute('task_id'))
