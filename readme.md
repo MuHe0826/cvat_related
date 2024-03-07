@@ -1,7 +1,5 @@
 **解决cvat不能导出关键帧的问题**
 
-**func.py 是利用opencv对视频帧率进行转换，cvat帧率为25**
-
 **auxiliary_annotation.py 利用训练好的模型进行辅助标注，修改相应的annotations文件**
 
 **Classification.py 对各类物体进行分类，存储在相应的文件夹下**
