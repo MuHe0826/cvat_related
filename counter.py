@@ -39,6 +39,7 @@ def count_files(dir_name):
         worksheet1.write_row(row, insert_data)
     workbook.close()
 
+
 if __name__ == '__main__':
-    dir_name = "D:\\pycharm\\pythonProject1\\annotations"
+    dir_name = "annotations"
     count_files(dir_name)

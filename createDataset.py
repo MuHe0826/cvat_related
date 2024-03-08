@@ -59,12 +59,12 @@ for track in tqdm(tracks, desc="Processing", unit="track"):
             ret, frame = cap.read()  # ret表示图像是否读取成功 frame为读到的图像文件
             if ret:
                 cv2.imwrite(img_path, frame)  # 将图像信息保存为指定格式的图像文件
-
+        img = cv2.imread(img_path)
         label = track.getAttribute('label')
         label_path = "./dataset/labels/task{}_{}.png".format(task_num, frame_num)
         # 如果还没创建相应的mask文件,就先创建mask文件
         if not os.path.exists(label_path):
-            img = np.zeros([1080, 1920], dtype=np.uint8)  # 这里的大小为图片大小 1920 x 1080
+            img = np.zeros(img.shape, dtype=np.uint8)  # 这里的大小为图片大小 1920 x 1080
             cv2.imwrite(label_path, img)
         # 获取label位置信息
         points = polygon[0].getAttribute('points').split(";")
@@ -95,7 +95,6 @@ source_images = "dataset/images"
 source_labels = "dataset/labels"
 output_train_dir = "dataset/train"
 output_test_dir = "dataset/test"
-
 
 # 创建训练集和测试集目录
 os.makedirs(output_train_dir+"/images", exist_ok=True)

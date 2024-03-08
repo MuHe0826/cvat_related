@@ -41,7 +41,7 @@ for label in labels:
     r = int(label_color[1:3], 16)
     g = int(label_color[3:5], 16)
     b = int(label_color[5:7], 16)
-    dic[label_name] = (b, g, r) # cv2.polylines()函数输入的颜色是（B,G,R）格式
+    dic[label_name] = (b, g, r)  # cv2.polylines()函数输入的颜色是（B,G,R）格式
 
 
 tracks = xml_file.getElementsByTagName('track')
@@ -76,3 +76,4 @@ for track in tqdm(tracks, desc="Processing", unit="track"):
         img = cv2.imread(img_path)
         img_poly = cv2.polylines(img, np.int32([pts]), isClosed=True, color=dic[label], thickness=2)
         cv2.imwrite(img_path, img_poly)
+
