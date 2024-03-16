@@ -8,20 +8,20 @@ import shutil
 from tqdm import tqdm
 
 
-consumables = ["hem_o_lok", "clip", "clamp", "buffer_tube", "guide_needle", "suture_needle", "syringe", "specimen_bag",
-               "cotton_ball", "gauze", "line", "other_consumables"]
-instrument = ["grasping_forceps", "attractor", "needle_holder", "scissors", "ultrasonic_knife", "ultrasonic_clamp",
-              "stapler", "hook", "other_instrument"]
+consumables = ["hem_o_lok", "clip",  "suture_needle", "syringe", "specimen_bag",
+               "gauze", "line", "other_consumables"]
+instrument = ["grasping_forceps", "attractor", "needle_holder", "scissors", "ultrasonic_knife", "electric_hook","electrotome",
+              "stapler", "hook","clip_applicator", "right_angle_grab","other_instrument"]
 
 # 创建保存结果的文件夹
-os.makedirs("dataset/images", exist_ok=True)
-os.makedirs("dataset/labels", exist_ok=True)
+os.makedirs("../dataset/images", exist_ok=True)
+os.makedirs("../dataset/labels", exist_ok=True)
 
 # 读取xml文件
-xml_file = xmldom.parse("annotations.xml")
+xml_file = xmldom.parse("../annotations/annotations.xml")
 
 # 解决annotations中的task_id与task_num的对应,task_num与videoName的对应,以及视频帧数的问题
-meta = xml_file.getElementsByTagName('meta')[0]
+meta = xml_file.getElementsByTagName('meta')[0] 
 project = meta.getElementsByTagName('project')[0]
 tasks = project.getElementsByTagName('tasks')[0]
 tasks = tasks.getElementsByTagName('task')
@@ -45,14 +45,14 @@ for track in tqdm(tracks, desc="Processing", unit="track"):
     task_id = int(track.getAttribute('task_id'))
     task_num = id2num[task_id]
     video_name = num_to_vName[task_num]
-    if os.path.exists("video/{}modify_fps_rate.mp4".format(video_name)):
-        cap = cv2.VideoCapture("video/{}modify_fps_rate.mp4".format(video_name))  # 视频的句柄
+    if os.path.exists("../video/{}modify_fps_rate.mp4".format(video_name)):
+        cap = cv2.VideoCapture("../video/{}modify_fps_rate.mp4".format(video_name))  # 视频的句柄
     else:
-        cap = cv2.VideoCapture("video/{}.mp4".format(video_name))
+        cap = cv2.VideoCapture("../video/{}.mp4".format(video_name))
     polygon = track.getElementsByTagName('polygon')
     if len(polygon) > 0:
         frame_num = int(polygon[0].getAttribute('frame')) - id2frame[task_id]
-        img_path = "dataset/images/task{}_{}.png".format(task_num, frame_num)
+        img_path = "../dataset/images/task{}_{}.png".format(task_num, frame_num)
         # 如果还没截取这个帧,就先截取这个帧
         if not os.path.exists(img_path):
             cap.set(cv2.CAP_PROP_POS_FRAMES, int(frame_num))  # frame_index要提取的帧的索引
@@ -61,7 +61,7 @@ for track in tqdm(tracks, desc="Processing", unit="track"):
                 cv2.imwrite(img_path, frame)  # 将图像信息保存为指定格式的图像文件
         img = cv2.imread(img_path)
         label = track.getAttribute('label')
-        label_path = "./dataset/labels/task{}_{}.png".format(task_num, frame_num)
+        label_path = "../dataset/labels/task{}_{}.png".format(task_num, frame_num)
         # 如果还没创建相应的mask文件,就先创建mask文件
         if not os.path.exists(label_path):
             img = np.zeros(img.shape, dtype=np.uint8)  # 这里的大小为图片大小 1920 x 1080
@@ -91,11 +91,12 @@ print("生成训练集和测试集")
 
 # 指定原始图片目录和输出的训练集、测试集目录
 test_ratio = 0.2
-source_images = "dataset/images"
-source_labels = "dataset/labels"
-output_train_dir = "dataset/train"
-output_test_dir = "dataset/test"
-
+source_images = "../dataset/images"
+source_labels = "../dataset/labels"
+output_train_dir = "../dataset/train"
+output_test_dir = "../dataset/test"
+os.makedirs("../dataset/train", exist_ok=True)
+os.makedirs("../dataset/test", exist_ok=True)
 # 创建训练集和测试集目录
 os.makedirs(output_train_dir+"/images", exist_ok=True)
 os.makedirs(output_train_dir+"/labels", exist_ok=True)
