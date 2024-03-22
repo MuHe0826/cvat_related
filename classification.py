@@ -5,11 +5,6 @@ import numpy as np
 from tqdm import tqdm
 
 
-consumables = ["hem_o_lok", "clip", "clamp", "buffer_tube", "guide_needle", "suture_needle", "syringe", "specimen_bag",
-               "cotton_ball", "gauze", "line", "other_consumables"]
-instrument = ["grasping_forceps", "attractor", "needle_holder", "scissors", "ultrasonic_knife", "ultrasonic_clamp",
-              "stapler", "hook", "other_instrument"]
-
 # 创建保存结果的文件夹
 os.makedirs("classification", exist_ok=True)
 
