@@ -3,12 +3,14 @@ import xml.dom.minidom as xmldom
 import xlsxwriter as xw
 import time
 
-
 from alive_progress import alive_bar
+
+
 dic = {"hem_o_lok": 0, "clip": 0, "clamp":0, "buffer_tube":0, "guide_needle":0, "suture_needle":0, "syringe":0, "specimen_bag":0,
        "cotton_ball":0, "gauze":0, "line":0, "other_consumbles":0, "other_instrument":0, "grasping_forceps":0, "attractor":0, "needle_holder":0,
        "scissors":0, "ultrasonic_knife":0, "ultrasonic_clamp":0,
               "stapler":0, "hook":0,"total":0}
+
 
 def count_files(xml_file):
     xml_file = xmldom.parse(xml_file)

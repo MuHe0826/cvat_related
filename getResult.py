@@ -9,10 +9,8 @@ from tqdm import tqdm
 if __name__ == "__main__":
     # 创建保存结果的文件夹
     os.makedirs("result", exist_ok=True)
-
     # 读取xml文件
     xml_file = xmldom.parse("annotations.xml")
-
     # 解决annotations中的task_id与task_num的对应,task_num与videoName的对应,以及视频帧数的问题
     meta = xml_file.getElementsByTagName('meta')[0]
     project = meta.getElementsByTagName('project')[0]
@@ -32,7 +30,6 @@ if __name__ == "__main__":
         frame_sum = frame_sum + task_size
         task_source = task.getElementsByTagName('source')[0].firstChild.nodeValue[:-4]
         num_to_vName[task_num] = task_source
-
     # 获取label的名称与颜色的对应关系
     labels = project.getElementsByTagName('labels')[0].getElementsByTagName('label')
     dic = dict()
