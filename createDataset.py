@@ -18,10 +18,10 @@ os.makedirs("../dataset/images", exist_ok=True)
 os.makedirs("../dataset/labels", exist_ok=True)
 
 # 读取xml文件
-xml_file = xmldom.parse("../annotations/annotations.xml")
+xml_file = xmldom.parse("../annotations_history/annotations.xml")
 
 # 解决annotations中的task_id与task_num的对应,task_num与videoName的对应,以及视频帧数的问题
-meta = xml_file.getElementsByTagName('meta')[0] 
+meta = xml_file.getElementsByTagName('meta')[0]
 project = meta.getElementsByTagName('project')[0]
 tasks = project.getElementsByTagName('tasks')[0]
 tasks = tasks.getElementsByTagName('task')
