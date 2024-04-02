@@ -12,14 +12,18 @@ from alive_progress import alive_bar
 
 
 
-dic = {"hem_o_lok": 0, "clip": 0, "clamp":0, "buffer_tube":0, "guide_needle":0, "suture_needle":0, "syringe":0, "specimen_bag":0,
-       "cotton_ball":0, "gauze":0, "line":0, "other_consumbles":0, "other_instrument":0, "grasping_forceps":0, "attractor":0, "needle_holder":0,
-       "scissors":0, "ultrasonic_knife":0, "ultrasonic_clamp":0,
-              "stapler":0, "hook":0,"total":0}
+dic = {"other_instrument": 0, "other_consumables": 0, "hem_o_lok": 0, "clip": 0, "clip_applicator": 0,
+       "suture_needle": 0, "specimen_bag": 0, "ultrasonic_knife": 0, "electrotome": 0, "stapler": 0, "gauze": 0,
+       "forceps": 0, "attractor": 0, "needle_holder": 0, "line": 0, "scissors": 0, "electric_hook": 0,
+       "total": 0}
+
 
 
 def count_files(xml_file):
     dic = {'total':0}
+
+def count(xml_file):
+
     xml_file = xmldom.parse(xml_file)
     # 获取xml文件中的元素
     tracks = xml_file.getElementsByTagName('track')
@@ -48,5 +52,10 @@ def count_files(xml_file):
         worksheet1.write_row(row, insert_data)
     workbook.close()
 if __name__ == '__main__':
+
     dir_name = r"annotations/annotations.xml"
     count_files(dir_name)
+
+    xml_name = "annotations.xml"
+    count(xml_name)
+
