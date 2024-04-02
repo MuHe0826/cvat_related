@@ -4,12 +4,12 @@ import xlsxwriter as xw
 import time
 
 from alive_progress import alive_bar
-<<<<<<< HEAD
+
 # dic = {"hem_o_lok": 0, "clip": 0, "clamp":0, "buffer_tube":0, "guide_needle":0, "suture_needle":0,  "specimen_bag":0,
 #        "cotton_ball":0, "gauze":0, "line":0, "grasping_forceps":0, "attractor":0, "needle_holder":0,
 #        "scissors":0, "ultrasonic_knife":0, "ultrasonic_clamp":0, "electrotome":0 ,
 #               "stapler":0, "hook":0, "other_consumables":0, "other_instrument":0,"total":0}
-=======
+
 
 
 dic = {"hem_o_lok": 0, "clip": 0, "clamp":0, "buffer_tube":0, "guide_needle":0, "suture_needle":0, "syringe":0, "specimen_bag":0,
@@ -18,7 +18,6 @@ dic = {"hem_o_lok": 0, "clip": 0, "clamp":0, "buffer_tube":0, "guide_needle":0, 
               "stapler":0, "hook":0,"total":0}
 
 
->>>>>>> f96236b711929d7e643f4625dc89cc41c135382d
 def count_files(xml_file):
     dic = {'total':0}
     xml_file = xmldom.parse(xml_file)
