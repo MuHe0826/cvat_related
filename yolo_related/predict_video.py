@@ -2,10 +2,10 @@ import cv2
 from ultralytics import YOLO
 
 # Load the YOLOv8 model
-model = YOLO('best.pt')
+model = YOLO('../best.pt')
 
 # Open the video file
-video_path = r"../video/M_05202021095646_0U53469052015646_1_002_009-1modify_fps_rate.mp4"
+video_path = r"../../video/M_05202021095646_0U53469052015646_1_002_009-1modify_fps_rate.mp4"
 cap = cv2.VideoCapture(video_path)
 
 # Loop through the video frames

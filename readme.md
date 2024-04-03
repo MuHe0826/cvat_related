@@ -11,3 +11,8 @@
 **getResult.py 根据annotations.xml文件生成标注结果**
 
 **predicted.py 输入原始img和label生成标注后img**
+
+**yolo_related处理相关yolo预处理，**
+**general_json2yolo.py 将cvat coco1.0格式转化为yolo数据训练格式，**
+**split_dataset.py 将数据分成训练、测试、验证三部分，**
+**create_images_labels.py 生成与label对应的图片**
