@@ -40,7 +40,6 @@ def getFrames(num, path, xml_path):
                 cv2.imwrite(img_path, frame)  # 将图像信息保存为指定格式的图像文件
 
 
-
 def draw_outline(source_images, source_labels, output_dir):
     # 画出目标图片的物体的轮廓
     os.makedirs(output_dir, exist_ok=True)
@@ -149,7 +148,6 @@ def process_annotation(xml_path, source_labels):
         file.writelines(lines)
 
 
-
 if __name__ == "__main__":
     # 任务编号与相应的视频路径
     num_to_vName = {
@@ -162,20 +160,17 @@ if __name__ == "__main__":
         7: 'video/JJXXoPgPY8gozkGkNqoImodify_fps_rate.mp4',
         10: 'video/05.mp4'
     }
-
     # 需要处理的视频文件、xml文件、任务数
     task_num = 2
     video_name = num_to_vName[task_num]
     xml_name = 'annotations/task{}.xml'.format(task_num)
     # 1.随机截取一定的帧
     # getFrames(task_num, video_name, xml_name)
-
     source_images = "auxiliary/task{}/img".format(task_num)
     source_labels = "auxiliary/task{}/label".format(task_num)
     output_dir = "auxiliary/task{}/pred".format(task_num)
     # 2.根据生成的标签对截取的帧进行标注
     # draw_outline(source_images, source_labels, output_dir)
-
     # 3.根据生成的labels处理对应的xml文件
     process_annotation(xml_name, source_labels)
 
