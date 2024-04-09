@@ -95,12 +95,12 @@ if __name__ == '__main__':
 
     # 指定原始图片目录和输出的训练集、测试集目录
     test_ratio = 0.1
-    source_images = "../dataset/images"
-    source_labels = "../dataset/labels"
-    output_train_dir = "../dataset/train"
-    output_test_dir = "../dataset/test"
-    os.makedirs("../dataset/train", exist_ok=True)
-    os.makedirs("../dataset/test", exist_ok=True)
+    source_images = "dataset/images"
+    source_labels = "dataset/labels"
+    output_train_dir = "dataset/train"
+    output_test_dir = "dataset/test"
+    os.makedirs("dataset/train", exist_ok=True)
+    os.makedirs("dataset/test", exist_ok=True)
     # 创建训练集和测试集目录
     os.makedirs(output_train_dir + "/images", exist_ok=True)
     os.makedirs(output_train_dir + "/labels", exist_ok=True)
