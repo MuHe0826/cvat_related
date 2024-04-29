@@ -42,11 +42,12 @@ def make_oredict_mask(path,save_path,pt_path):
             mask = np.zeros(img.shape, dtype=np.uint8)
             pixel_coords=det
             try:
-                mask = cv2.fillPoly(mask, np.int32([pixel_coords]),
-                                    (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
+                # mask = cv2.fillPoly(mask, np.int32([pixel_coords]),
+                #                     (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
+                mask = cv2.fillPoly(mask, np.int32([pixel_coords]), (label, label, label))
             except Exception as e:
                 print("mask_error++++++++++++++++++++++++++++++++++++++++++==")
-            #mask = cv2.fillPoly(mask, np.int32([pixel_coords]),(label, label, label))
+
         cv2.imwrite(os.path.join(output_file_dir, image_name), mask)
 
 if __name__ == "__main__":
